@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Your Path - Minimalist Interactive Experience</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Initial Screen -->
+        <div id="start-screen" class="screen active">
+            <h1 class="fade-in">Welcome</h1>
+            <p class="subtitle fade-in-delay">A minimalist interactive experience</p>
+            <button class="btn start-btn pulse" onclick="showChoices()">Begin</button>
+        </div>
+
+        <!-- Choice Screen -->
+        <div id="choice-screen" class="screen">
+            <h2 class="question fade-in">What calls to you?</h2>
+            <div class="choices-grid">
+                <div class="choice-card" data-choice="nature" onclick="selectChoice('nature')">
+                    <div class="choice-icon">🌿</div>
+                    <h3>Nature</h3>
+                    <p class="choice-desc">Embrace tranquility</p>
+                </div>
+                <div class="choice-card" data-choice="tech" onclick="selectChoice('tech')">
+                    <div class="choice-icon">⚡</div>
+                    <h3>Technology</h3>
+                    <p class="choice-desc">Seek innovation</p>
+                </div>
+                <div class="choice-card" data-choice="art" onclick="selectChoice('art')">
+                    <div class="choice-icon">🎨</div>
+                    <h3>Art</h3>
+                    <p class="choice-desc">Create beauty</p>
+                </div>
+                <div class="choice-card" data-choice="zen" onclick="selectChoice('zen')">
+                    <div class="choice-icon">🧘</div>
+                    <h3>Zen</h3>
+                    <p class="choice-desc">Find balance</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Secondary Choice Screen -->
+        <div id="secondary-screen" class="screen">
+            <h2 class="question fade-in">How will you proceed?</h2>
+            <div class="choices-list">
+                <div class="list-choice" onclick="selectStyle('minimal')">
+                    <span class="choice-number">01</span>
+                    <div class="choice-content">
+                        <h3>Minimal</h3>
+                        <p>Less is more</p>
+                    </div>
+                    <span class="arrow">→</span>
+                </div>
+                <div class="list-choice" onclick="selectStyle('vibrant')">
+                    <span class="choice-number">02</span>
+                    <div class="choice-content">
+                        <h3>Vibrant</h3>
+                        <p>Full of energy</p>
+                    </div>
+                    <span class="arrow">→</span>
+                </div>
+                <div class="list-choice" onclick="selectStyle('calm')">
+                    <span class="choice-number">03</span>
+                    <div class="choice-content">
+                        <h3>Calm</h3>
+                        <p>Peaceful approach</p>
+                    </div>
+                    <span class="arrow">→</span>
+                </div>
+                <div class="list-choice" onclick="selectStyle('bold')">
+                    <span class="choice-number">04</span>
+                    <div class="choice-content">
+                        <h3>Bold</h3>
+                        <p>Make a statement</p>
+                    </div>
+                    <span class="arrow">→</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final Screen -->
+        <div id="final-screen" class="screen">
+            <div class="result-container fade-in">
+                <h2 class="result-title">Your Journey</h2>
+                <div id="result-content" class="result-content"></div>
+                <div class="result-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Choice</span>
+                        <span class="stat-value" id="choice-display"></span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Style</span>
+                        <span class="stat-value" id="style-display"></span>
+                    </div>
+                </div>
+                <button class="btn reset-btn" onclick="reset()">Start Over</button>
+            </div>
+        </div>
+
+        <!-- Progress Indicator -->
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress"></div>
+        </div>
+
+        <!-- Navigation Dots -->
+        <div class="nav-dots">
+            <span class="dot active" data-screen="0"></span>
+            <span class="dot" data-screen="1"></span>
+            <span class="dot" data-screen="2"></span>
+            <span class="dot" data-screen="3"></span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
