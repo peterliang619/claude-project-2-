@@ -8,7 +8,98 @@ document.addEventListener('DOMContentLoaded', () => {
     updateProgress();
     addCardAnimations();
     addListAnimations();
+    initCustomCursor();
 });
+
+// Custom Cursor
+function initCustomCursor() {
+    const cursor = document.querySelector('.cursor');
+    const cursorCircle = document.querySelector('.cursor-circle');
+    const cursorDot = document.querySelector('.cursor-dot');
+
+    // Track mouse position
+    let mouseX = 0;
+    let mouseY = 0;
+    let circleX = 0;
+    let circleY = 0;
+    let dotX = 0;
+    let dotY = 0;
+
+    // Update mouse position
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        // Instant update for dot (more responsive)
+        dotX = mouseX;
+        dotY = mouseY;
+        cursorDot.style.left = dotX + 'px';
+        cursorDot.style.top = dotY + 'px';
+    });
+
+    // Smooth follow animation for circle
+    function animateCursor() {
+        // Easing for smooth follow effect
+        const ease = 0.15;
+        circleX += (mouseX - circleX) * ease;
+        circleY += (mouseY - circleY) * ease;
+
+        cursorCircle.style.left = circleX + 'px';
+        cursorCircle.style.top = circleY + 'px';
+
+        requestAnimationFrame(animateCursor);
+    }
+
+    animateCursor();
+
+    // Interactive elements
+    const interactiveElements = document.querySelectorAll(
+        'button, .choice-card, .list-choice, .dot, a, .btn'
+    );
+
+    // Add hover listeners to all interactive elements
+    interactiveElements.forEach(element => {
+        element.addEventListener('mouseenter', () => {
+            cursor.classList.add('hover');
+        });
+
+        element.addEventListener('mouseleave', () => {
+            cursor.classList.remove('hover');
+        });
+    });
+
+    // Add click animation
+    document.addEventListener('mousedown', () => {
+        cursor.classList.add('click');
+    });
+
+    document.addEventListener('mouseup', () => {
+        cursor.classList.remove('click');
+    });
+
+    // Update interactive elements after screen transitions
+    const observer = new MutationObserver(() => {
+        const newElements = document.querySelectorAll(
+            'button, .choice-card, .list-choice, .dot, a, .btn'
+        );
+        newElements.forEach(element => {
+            if (!element.hasAttribute('data-cursor-initialized')) {
+                element.setAttribute('data-cursor-initialized', 'true');
+                element.addEventListener('mouseenter', () => {
+                    cursor.classList.add('hover');
+                });
+                element.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('hover');
+                });
+            }
+        });
+    });
+
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+}
 
 // Show choices screen
 function showChoices() {
@@ -328,5 +419,6 @@ document.addEventListener('mousemove', (e) => {
 });
 
 console.log('✨ Minimalist Interactive Experience Loaded');
+console.log('🖱️  Custom cursor with hover interactions enabled');
 console.log('💡 Press ESC to reset at any time');
 console.log('⌨️  Use number keys (1-4) on the second choice screen');
