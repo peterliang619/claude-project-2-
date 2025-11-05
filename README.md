@@ -29,8 +29,9 @@ A minimalist webpage featuring multiple interactive choices and smooth micro-int
 - **Custom Cursor Animations**:
   - Smooth follow effect with easing (circle follows with delay, dot is instant)
   - Expands to 70px when hovering over interactive elements
+  - **Color inversion on hover**: Changes from theme color to white when over interactive elements
   - Contracts on click for tactile feedback
-  - Adapts color based on selected theme
+  - Adapts color based on selected theme (Nature=green, Tech=blue, Art=pink, Zen=purple)
 - Fade-in animations on load
 - Pulse animations on buttons
 - Slide-in animations for list items
